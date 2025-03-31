@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: 'TBC.env' }); // Load environment variables
+dotenv.config({ path: 'key.env' }); // Load environment variables
 
 const app = express();
 const PORT = 3000;
@@ -18,7 +18,7 @@ const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKEN;
 // TODO: ROUTE 1 - Fetch and display custom object data on the homepage
 app.get('/', async (req, res) => {
     try {
-      const url = 'https://api.hubapi.com/crm/v3/objects/planet';
+      const url = 'https://api.hubapi.com/crm/v3/objects/planets?properties=name,colour,size';
         const headers = {
             Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
             'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ app.post('/update-coi', async (req, res) => {
         // Get form data
         const { name, size, colour } = req.body;
 
-        const url = 'https://api.hubapi.com/crm/v3/objects/planet';
+        const url = 'https://api.hubapi.com/crm/v3/objects/planets?properties=name,colour,size';
         const headers = {
             Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
             'Content-Type': 'application/json'
